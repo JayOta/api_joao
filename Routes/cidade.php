@@ -1,15 +1,19 @@
 <?php 
-// header("Content-Type: application/json");
+header("Content-Type: application/json");
 
 if($_SERVER["REQUEST_METHOD"] == "GET"){
-    echo "Passei na rota Estado - GET";
+    require "../Controller/cidade.php";
+    echo buscarCidade();
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo "Passei na rota Estado - POST";
+    require "../Controller/cidade.php";
+    echo colocarCidade();
 }
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    echo "Passei na rota Estado - PUT";
+    require "../Controller/cidade.php";
+    echo alterarCidade();
 }
 if($_SERVER["REQUEST_METHOD"] == "DELETE"){
-    echo "Passei na rota Estado - DELETE";
+    require "../Controller/cidade.php";
+    echo deletarEstado();
 }

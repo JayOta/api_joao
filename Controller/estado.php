@@ -9,6 +9,10 @@ function colocarEstado(){
     $estado = postEstados();
     return $estado;
 }
+function alterarEstado(){
+    $estado = putEstados();
+    return $estado;
+}
 function deletarEstado(){
     $estado = deleteEstados();
     return $estado;
