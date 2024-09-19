@@ -1,8 +1,6 @@
 <?php 
 require '../Service/conexao.php';
-require '../Model/crud_estado.php';
 
-$nome_cidade = "Umu";
 function getCidades(){
     header("Content-type: application/json");
     global $conn;
@@ -12,26 +10,28 @@ function getCidades(){
     $cidade = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return json_encode($cidade);
 }
-function postCidades(){
-    global $conn, $nome_cidade, $id;
+function postCidades($nome_cidade, $id){
+    global $conn;
+
     $stmt = $conn->prepare("INSERT INTO `cidade`(`nome_cidade`, `estado_id`) VALUES (\"$nome_cidade\", \"$id\")");
     $stmt->execute();
-    $id_cidade = $conn->lastInsertId();
-    $ultima_cidade = $conn->prepare("SELECT * FROM `cidade` WHERE id = $id_cidade");
-    return json_encode(["Estado adicionado" => $ultima_cidade]);
+    $id = $conn->lastInsertId();
+    return json_encode(["Cidade adicionada" => $nome_cidade, "id" => $id]);
 }
-function putCidades(){
-    global $conn, $nome_cidade;
-
-    $stmt = $conn->prepare("UPDATE `cidade` SET nome_cidade WHERE nome_cidade = '$nome_cidade'");
+function putCidades($nome_cidade, $cidade_nova){
+    global $conn;
+    $cidade_antiga = $nome_cidade;
+    $stmt = $conn->prepare("UPDATE cidade SET nome_cidade = :novoNome WHERE nome_cidade = :nomeAntigo");
+    $stmt->bindParam(':novoNome', $cidade_nova);
+    $stmt->bindParam(':nomeAntigo', $cidade_antiga);
     $stmt->execute();
-    $cidade_nova = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return json_encode(["Estado alterado" => $nome_cidade, "Estado novo" => $cidade_nova]);
+    return json_encode(["Cidade alterada" => $nome_cidade, 
+                        "Cidade nova" => $cidade_nova]);
 }
 function deleteCidades(){
     global $conn, $nome_cidade;
 
-    $stmt = $conn->prepare("DELETE FROM `cidade` WHERE nome_cidade = $nome_cidade");
+    $stmt = $conn->prepare("DELETE FROM `cidade` WHERE nome_cidade = '$nome_cidade'");
     $stmt->execute();
-    return json_encode(["1 $ foi removida"]);
+    return json_encode(["Nome das cidades removidas" => $nome_cidade]);
 }

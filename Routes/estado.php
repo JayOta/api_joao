@@ -1,19 +1,23 @@
 <?php 
+require "../Controller/estado.php";
+
 header("Content-Type: application/json");
 
 if($_SERVER["REQUEST_METHOD"] == "GET"){
-    require "../Controller/estado.php";
     echo buscarEstado();
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    require "../Controller/estado.php";
-    echo colocarEstado();
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $estado = colocarEstado($dados);
+    echo json_encode($estado);
 }
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    require "../Controller/estado.php";
-    echo "Passei na rota Estado - PUT";
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $estado = alterarEstado($dados);
+    echo json_encode($estado);
 }
 if($_SERVER["REQUEST_METHOD"] == "DELETE"){
-    require "../Controller/estado.php";
-    echo deletarEstado();
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $estado = deletarEstado($dados);
+    echo deletarEstado($dados);
 }

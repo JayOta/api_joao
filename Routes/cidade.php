@@ -1,19 +1,23 @@
 <?php 
+require "../Controller/cidade.php";
+
 header("Content-Type: application/json");
 
 if($_SERVER["REQUEST_METHOD"] == "GET"){
-    require "../Controller/cidade.php";
     echo buscarCidade();
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    require "../Controller/cidade.php";
-    echo colocarCidade();
+    $dados = json_decode(file_get_contents('php://input'), true); // Arrumando..
+    $cidade = colocarCidade($dados);
+    echo json_encode($cidade);
 }
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    require "../Controller/cidade.php";
-    echo alterarCidade();
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $cidade = alterarCidade($dados);
+    echo json_encode($cidade);
 }
 if($_SERVER["REQUEST_METHOD"] == "DELETE"){
-    require "../Controller/cidade.php";
-    echo deletarEstado();
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $estado = deletarEstado($dados);
+    echo deletarCidade($dados);
 }
