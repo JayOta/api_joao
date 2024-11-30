@@ -1,5 +1,14 @@
 # api_joao
+Este repositório foi feito de uma atividade sobre API REST
 
-Estou aprendendo a construir uma API rest, onde terá o CRUD para: Estados, Cidades e Pessoas.
+<h2>Importante</h2>
+O teste da API pode ser feito através do POSTMAN, mas também pode ser usada através dos arquivos.
 
-O teste da API é feito através do Postman
+<h2>Ferramentes utilizadas:</h2>
+<ul>
+  <li>PHP</li>
+  <li>SQL</li>
+  <li>POSTMAN</li>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
