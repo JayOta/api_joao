@@ -1,7 +1,8 @@
-<?php 
+<?php
 require '../Service/conexao.php';
 
-function getCidades(){
+function getCidades()
+{
     header("Content-type: application/json");
     global $conn;
 
@@ -10,7 +11,17 @@ function getCidades(){
     $cidade = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return json_encode($cidade);
 }
-function postCidades($nome_cidade, $id){
+function getCidadesParam($nome_cidade)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT * FROM `cidade` WHERE nome_cidade = '$nome_cidade'");
+    $stmt->execute();
+    $cidade = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return json_encode($cidade);
+}
+function postCidades($nome_cidade, $id)
+{
     global $conn;
 
     $stmt = $conn->prepare("INSERT INTO `cidade`(`nome_cidade`, `estado_id`) VALUES (\"$nome_cidade\", \"$id\")");
@@ -18,18 +29,22 @@ function postCidades($nome_cidade, $id){
     $id = $conn->lastInsertId();
     return json_encode(["Cidade adicionada" => $nome_cidade, "id" => $id]);
 }
-function putCidades($nome_cidade, $cidade_nova){
+function putCidades($nome_cidade, $cidade_nova)
+{
     global $conn;
     $cidade_antiga = $nome_cidade;
     $stmt = $conn->prepare("UPDATE cidade SET nome_cidade = :novoNome WHERE nome_cidade = :nomeAntigo");
     $stmt->bindParam(':novoNome', $cidade_nova);
     $stmt->bindParam(':nomeAntigo', $cidade_antiga);
     $stmt->execute();
-    return json_encode(["Cidade alterada" => $nome_cidade, 
-                        "Cidade nova" => $cidade_nova]);
+    return json_encode([
+        "Cidade alterada" => $nome_cidade,
+        "Cidade nova" => $cidade_nova
+    ]);
 }
-function deleteCidades(){
-    global $conn, $nome_cidade;
+function deleteCidades($nome_cidade)
+{
+    global $conn;
 
     $stmt = $conn->prepare("DELETE FROM `cidade` WHERE nome_cidade = '$nome_cidade'");
     $stmt->execute();

@@ -1,19 +1,23 @@
-<?php 
+<?php
+require "../Controller/pessoa.php";
+
 header("Content-Type: application/json");
 
-if($_SERVER["REQUEST_METHOD"] == "GET"){
-    header("Content-Type: application/json");
-    echo /*"Passei na rota Estado - GET";*/
-    json_encode([
-        'method' => 'GET'
-    ]);
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    echo buscarPessoa();
 }
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo "Passei na rota Estado - POST";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $pessoa = colocarPessoa($dados);
+    echo json_encode($pessoa);
 }
-if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    echo "Passei na rota Estado - PUT";
+if ($_SERVER["REQUEST_METHOD"] == "PUT") {
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $pessoa = alterarPessoa($dados);
+    echo json_encode($pessoa);
 }
-if($_SERVER["REQUEST_METHOD"] == "DELETE"){
-    echo "Passei na rota Estado - DELETE";
+if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+    $dados = json_decode(file_get_contents('php://input'), true);
+    $pessoa = deletarPessoa($dados);
+    echo deletarPessoa($dados);
 }
