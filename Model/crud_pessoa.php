@@ -28,15 +28,15 @@ function postPessoas($nome_pessoa, $idade, $cidade_id)
     $id = $conn->lastInsertId();
     return json_encode(["Pessoa adicionada" => $nome_pessoa, "Idade" => $idade, "id" => $id]);
 }
-function putPessoas($nome_pessoa, $pessoa_nova) // Colocar Função para editar a idade e a cidade
+function putPessoas($nome_pessoa, $pessoa_nova, $cidade_id_antigo, $cidade_id_novo) // Colocar Função para editar a idade e a cidade
 {
     global $conn;
     $pessoa_antiga = $nome_pessoa;
-    $stmt = $conn->prepare("UPDATE `pessoa` SET nome_pessoa = :novoNome WHERE nome_pessoa = :nomeAntigo");
+    $stmt = $conn->prepare("UPDATE `pessoa` SET nome_pessoa = :novoNome, cidade_id = :cidadeIdNovo WHERE nome_pessoa = :nomeAntigo AND cidade_id = :cidadeIdAntigo");
     $stmt->bindParam(':novoNome', $pessoa_nova);
     $stmt->bindParam(':nomeAntigo', $pessoa_antiga);
-    // Colocar para alterar a idade
-    // Colocar para alterar a cidade
+    $stmt->bindParam(':cidadeIdAntigo', $cidade_id_antigo);
+    $stmt->bindParam(':cidadeIdNovo', $cidade_id_novo);
     $stmt->execute();
     return json_encode([
         "Pessoa alterada" => $nome_pessoa,

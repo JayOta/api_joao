@@ -31,13 +31,15 @@ function postEstados($nome_estado, $sigla_estado)
         "id" => $id
     ]);
 }
-function putEstados($nome_estado, $estado_novo)
+function putEstados($nome_estado, $estado_novo, $sigla_antiga, $sigla_nova)
 {
     global $conn;
     $estado_antigo = $nome_estado;
-    $stmt = $conn->prepare("UPDATE estado SET nome_estado = :novoNome WHERE nome_estado = :nomeAntigo");
+    $stmt = $conn->prepare("UPDATE estado SET nome_estado = :novoNome, sigla_estado = :siglaNova WHERE nome_estado = :nomeAntigo AND sigla_estado = :siglaAntiga");
     $stmt->bindParam(':novoNome', $estado_novo);
     $stmt->bindParam(':nomeAntigo', $estado_antigo);
+    $stmt->bindParam(':siglaAntiga', $sigla_antiga);
+    $stmt->bindParam(':siglaNova', $sigla_nova);
     $stmt->execute();
     return json_encode([
         "Estado alterado" => $nome_estado,

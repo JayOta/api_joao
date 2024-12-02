@@ -26,9 +26,10 @@
         <form method="post" class="cidade" action="../Controller/pessoa.php">
             <h1>Editar Pessoa</h1>
             <input type="text" class="nome_pessoa" name="nome_antigo_pessoa" placeholder="Nome Antigo da Pessoa">
-            <input type="text" class="sigla_estado" name="nome_novo_pessoa" placeholder="Nome Novo da Pessoa">
-            <!-- Colocar para alterar a idade -->
-            <!-- Colocar para alterar a cidade -->
+            <input type="text" class="nome_pessoa" name="nome_novo_pessoa" placeholder="Nome Novo da Pessoa">
+            <!-- Idade não é alterada pois ela deveria atualizar-se a cada ano automaticamente -->
+            <input type="text" class="cidade_id" name="cidade_id_antigo_pessoa" placeholder="Id da Cidade Antiga">
+            <input type="text" class="cidade_id" name="cidade_id_novo_pessoa" placeholder="Id da Cidade Nova">
             <input type="submit" value="Enviar" name="put_pessoa">
         </form>
         <form method="post" class="pessoa" action="../Controller/pessoa.php">

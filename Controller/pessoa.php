@@ -13,7 +13,7 @@ function buscarCidadeParam($dados)
 }
 if (isset($_GET['get_pessoa'])) {
     $dados['nome_pessoa'] = $_GET['nome_pessoa'];
-    buscarCidadeParam($dados); // Arrumar para poder ver com parâmetros
+    buscarCidadeParam($dados);
     echo json_encode(["Pessoas existentes -> " => $dados]);
 }
 function colocarPessoa($dados)
@@ -30,14 +30,14 @@ if (isset($_POST['insert_pessoa'])) {
 }
 function alterarPessoa($dados)
 {
-    $pessoa = putPessoas($dados['nome_pessoa'], $dados['pessoa_nova']);
+    $pessoa = putPessoas($dados['nome_pessoa'], $dados['pessoa_nova'], $dados['cidade_id_antigo'], $dados['cidade_id_novo']);
     return $pessoa;
 }
 if (isset($_POST['put_pessoa'])) {
     $dados['nome_pessoa'] = $_POST['nome_antigo_pessoa'];
     $dados['pessoa_nova'] = $_POST['nome_novo_pessoa'];
-    // Colocar para alterar a idade
-    // Colocar para alterar a cidade
+    $dados['cidade_id_antigo'] = $_POST['cidade_id_antigo_pessoa'];
+    $dados['cidade_id_novo'] = $_POST['cidade_id_novo_pessoa'];
     alterarPessoa($dados);
     echo json_encode($dados);
 }

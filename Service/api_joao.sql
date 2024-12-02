@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/09/2024 às 14:10
+-- Tempo de geração: 02/12/2024 às 03:20
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -29,9 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cidade` (
   `cidade_id` int(11) NOT NULL,
-  `nome_cidade` int(11) NOT NULL,
+  `nome_cidade` varchar(150) NOT NULL,
   `estado_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cidade`
+--
+
+INSERT INTO `cidade` (`cidade_id`, `nome_cidade`, `estado_id`) VALUES
+(12, 'Maringá', 21),
+(13, 'Umuarama', 21);
 
 -- --------------------------------------------------------
 
@@ -45,6 +53,14 @@ CREATE TABLE `estado` (
   `sigla_estado` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `estado`
+--
+
+INSERT INTO `estado` (`estado_id`, `nome_estado`, `sigla_estado`) VALUES
+(21, 'Paraná', 'Pr'),
+(22, 'Rio de Janeiro', 'RJ');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +73,13 @@ CREATE TABLE `pessoa` (
   `idade` int(11) NOT NULL,
   `cidade_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pessoa`
+--
+
+INSERT INTO `pessoa` (`pessoa_id`, `nome_pessoa`, `idade`, `cidade_id`) VALUES
+(3, 'John', 16, 13);
 
 --
 -- Índices para tabelas despejadas
@@ -90,19 +113,19 @@ ALTER TABLE `pessoa`
 -- AUTO_INCREMENT de tabela `cidade`
 --
 ALTER TABLE `cidade`
-  MODIFY `cidade_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cidade_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `estado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `estado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `pessoa_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pessoa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para tabelas despejadas
