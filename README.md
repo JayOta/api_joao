@@ -1,5 +1,4 @@
-# api_joao
-Este repositório foi feito de uma atividade sobre API REST
+# Atividade sobre API REST com PHP puro 
 
 <h2>Importante</h2>
 O teste da API pode ser feito através do POSTMAN, mas também pode ser usada através dos arquivos.
