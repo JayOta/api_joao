@@ -1,9 +1,9 @@
-# Atividade sobre API REST com PHP puro 
+# REST API Activity with Vanilla PHP
 
-<h2>Importante</h2>
-O teste da API pode ser feito através do POSTMAN, mas também pode ser usada através dos arquivos.
+<h2>Important</h2>
+The API can be tested using POSTMAN, but it can also be used through the files.
 
-<h2>Ferramentes utilizadas:</h2>
+<h2>Tools used:</h2>
 <ul>
   <li>PHP</li>
   <li>SQL</li>
